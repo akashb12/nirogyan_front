@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { register } from '../Redux/slice/UserSlice';
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 function RegisterPage(){
     const dispatch = useDispatch();
     const [name, setName] = useState("");
@@ -56,6 +56,7 @@ function RegisterPage(){
                     <TextField id="outlined-basic-address" label="Address" variant="outlined" onChange={(e) => setAddress(e.target.value)} required />
                     {error && <span className='error'>*{error}</span>}
                     <Button variant="contained" onClick={submit}>Submit</Button>
+                    <p>Already Have An Account? <Link to="/login">Login</Link></p>
                 </Box>
             </div>
         </div>

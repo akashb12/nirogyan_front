@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { login, register } from '../Redux/slice/UserSlice';
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 function LoginPage(){
     const dispatch = useDispatch();
     const [name, setName] = useState("");
@@ -51,6 +51,7 @@ function LoginPage(){
                     <TextField id="outlined-basic-password"type='password' label="Password" variant="outlined" onChange={(e) => setPassword(e.target.value)} required />
                     {error && <span className='error'>*{error}</span>}
                     <Button variant="contained" onClick={submit}>Submit</Button>
+                    <p>Don't Have Account? <Link to="/register">Create Account</Link></p>
                 </Box>
             </div>
         </div>
