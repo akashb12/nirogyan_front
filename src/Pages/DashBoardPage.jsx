@@ -1,11 +1,12 @@
 import React from 'react'
 import NavBar from '../Components/NavBar'
+import ReportList from '../Components/ReportList'
 
 const DashBoardPage = () => {
   return (
     <div className='dashboard-page'>
         <NavBar />
-      hello
+        <ReportList />
     </div>
   )
 }
