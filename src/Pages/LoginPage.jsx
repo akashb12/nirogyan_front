@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { login, register } from '../Redux/slice/UserSlice';
+import { login } from '../Redux/slice/UserSlice';
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useNavigate,Link } from 'react-router-dom';
@@ -23,7 +23,7 @@ function LoginPage(){
             password:password
         }
         dispatch(login(data)).then((res) => {
-            if(res.payload.status != 200) {
+            if(res.payload.status !== 200) {
                 setError(res.payload.data)
             } else {
                 localStorage.setItem('user',JSON.stringify(res.payload.data.data));
@@ -42,16 +42,16 @@ function LoginPage(){
                 <Box
                     component="form"
                     sx={{
-                        '& > :not(style)': { m: 1, width: '40ch' }, display: 'flex', flexDirection: 'column'
+                        '& > :not(style)': { m: 1, width: '40ch' }, display: 'flex', flexDirection: 'column',alignItems:'center',justifyContent:'center'
                     }}
                     noValidate
                     autoComplete="off"
                 >
                     <TextField id="outlined-basic-name" label="Name" variant="outlined" onChange={(e) => setName(e.target.value)} required />
                     <TextField id="outlined-basic-password"type='password' label="Password" variant="outlined" onChange={(e) => setPassword(e.target.value)} required />
-                    {error && <span className='error'>*{error}</span>}
+                    {error && <span className='error' style={{textAlign:'center'}}>*{error}</span>}
                     <Button variant="contained" onClick={submit}>Submit</Button>
-                    <p>Don't Have An Account? <Link to="/register">Create Account</Link></p>
+                    <p className='authentication-component-redirect'>Don't Have An Account? <Link to="/register">Create Account</Link></p>
                 </Box>
             </div>
         </div>

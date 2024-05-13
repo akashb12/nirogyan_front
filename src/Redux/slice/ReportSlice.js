@@ -16,12 +16,18 @@ export const updateReport = createAsyncThunk('updateReport',async(data)=> {
     const res = await axiosRequest.put(`/api/patient/updateReport/${_id}`,fields).then((res)=>res).catch((err) => err.response);
     return {status:res.status,data:res.data};
 });
+
+export const getReportDetails = createAsyncThunk('getReportDetails',async(id)=> {
+    const res = await axiosRequest.get(`/api/patient/report/${id}`).then((res)=>res).catch((err) => err.response);
+    return {status:res.status,data:res.data};
+});
 export const reportSliceData = createSlice({
     name:'reports',
     initialState:{
         reportList:{},
         createReport:{},
-        updateReport:{}
+        updateReport:{},
+        getReportDetails:{}
     },
     reducers:{},
     extraReducers:(builder) => {
@@ -33,6 +39,9 @@ export const reportSliceData = createSlice({
         });
         builder.addCase(updateReport.fulfilled,(state,{payload})=> {
             state.updateReport = payload;
+        });
+        builder.addCase(getReportDetails.fulfilled,(state,{payload})=> {
+            state.getReportDetails = payload;
         });
     }
 })

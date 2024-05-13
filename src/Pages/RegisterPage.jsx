@@ -27,7 +27,7 @@ function RegisterPage(){
             address:address
         }
         dispatch(register(data)).then((res) => {
-            if(res.payload.status != 201) {
+            if(res.payload.status !== 201) {
                 setError(res.payload.data)
             } else {
                 if(res.payload && res.payload.data) {
@@ -45,18 +45,18 @@ function RegisterPage(){
                 <Box
                     component="form"
                     sx={{
-                        '& > :not(style)': { m: 1, width: '40ch' }, display: 'flex', flexDirection: 'column'
+                        '& > :not(style)': { m: 1, width: '40ch' }, display: 'flex', flexDirection: 'column',alignItems: 'center',justifyContent: 'center'
                     }}
                     noValidate
                     autoComplete="off"
                 >
                     <TextField id="outlined-basic-name" label="Name" variant="outlined" onChange={(e) => setName(e.target.value)} required />
                     <TextField id="outlined-basic-password"type='password' label="Password" variant="outlined" onChange={(e) => setPassword(e.target.value)} required />
-                    <TextField type='number' id="outlined-basic-phone" label="Phone" variant="outlined" onChange={(e) => setPhone(e.target.value)} required inputProps={{ maxLength: 10 }}/>
+                    <TextField type='tel' id="outlined-basic-phone" label="Phone" variant="outlined" onChange={(e) => setPhone(e.target.value)} required inputProps={{ maxLength: 10 }}/>
                     <TextField id="outlined-basic-address" label="Address" variant="outlined" onChange={(e) => setAddress(e.target.value)} required />
-                    {error && <span className='error'>*{error}</span>}
+                    {error && <span className='error' style={{textAlign:'center'}}>*{error}</span>}
                     <Button variant="contained" onClick={submit}>Submit</Button>
-                    <p>Already Have An Account? <Link to="/login">Login</Link></p>
+                    <p className='authentication-component-redirect'>Already Have An Account? <Link to="/login">Login</Link></p>
                 </Box>
             </div>
         </div>

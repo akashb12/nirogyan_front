@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material'
 import React from 'react'
 
-const Fields = ({name,label,value,onFieldsChange}) => {
+const Fields = ({name,label,type,value,max,onFieldsChange}) => {
     return (
         <>
             <TextField
@@ -12,11 +12,12 @@ const Fields = ({name,label,value,onFieldsChange}) => {
                 id={name}
                 name={name}
                 label={label}
-                type="text"
+                type={type}
                 fullWidth
                 variant="standard"
                 value={value}
                 onChange={(e) => onFieldsChange(e)}
+                inputProps={{ maxLength: max }}
             />
         </>
     )

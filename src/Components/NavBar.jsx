@@ -9,18 +9,17 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useDispatch } from 'react-redux';
 import { logout } from '../Redux/slice/UserSlice';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { MyContext } from '../MyContext';
 
 
 export default function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {user} = useContext(MyContext);
+  const user = JSON.parse(localStorage.getItem('user'));
+
 
   const logoutUser = () => {
     dispatch(logout()).then((res)=> {
-      if(res.payload.status != 200) {
+      if(res.payload.status !== 200) {
         console.log(res);
       } else {
         navigate('/login');
@@ -45,7 +44,7 @@ export default function NavBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            {user.lab_name.toUpperCase()}
+            {user && user.lab_name.toUpperCase()}
           </Typography>
           <div className='nav-logout'>
             <LogoutIcon onClick={logoutUser} />

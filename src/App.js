@@ -6,13 +6,13 @@ import DashBoardPage from './Pages/DashBoardPage';
 import ProtectedRoute from './utils/ProtectedRoute';
 import { MyContext } from './MyContext';
 import { useState } from 'react';
+import ReportPage from './Pages/ReportPage';
 
 function App() {
-  const user = JSON.parse(localStorage.getItem('user'));
   const [loader, setLoader] = useState(false);
   return (
     <div className="App">
-      <MyContext.Provider value={{ user, loader, setLoader }}>
+      <MyContext.Provider value={{ loader, setLoader }}>
         {loader ? <div className='fullscreen-load'>
         <span className="loader"></span>
         Loading...
@@ -23,6 +23,11 @@ function App() {
             <Route path="/" element={
               <ProtectedRoute>
                 <DashBoardPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/report/:id" element={
+              <ProtectedRoute>
+                <ReportPage />
               </ProtectedRoute>
             } />
           </Routes>

@@ -23,7 +23,7 @@ const CreateReport = ({ openDialog, closeDialog, editReport }) => {
     const [error, setError] = useState("");
     const [open, setOpen] = useState(false);
     const [activeStep, setActiveStep] = React.useState(0);
-    const [patientFields, setPatientFields] = useState({ name: "", age: "", address: "", phone: "", examined_by: "", examined_for_disease: "", examined_date: new Date().toISOString().substr(0, 10), patient_result: [], test_result: "" });
+    const [patientFields, setPatientFields] = useState({ name: "", age: "", gender: "", address: "", phone: "", examined_by: "", examined_for_disease: "", examined_date: new Date().toISOString().substr(0, 10), patient_result: [], test_result: "" });
     const [testFields, setTestFields] = useState([{ id: 0, test_name: "", normal_range: "", patient_value: "" }]);
     const { setLoader } = useContext(MyContext);
     const dispatch = useDispatch();
@@ -55,14 +55,14 @@ const CreateReport = ({ openDialog, closeDialog, editReport }) => {
 
     const handleNext = async (index) => {
         setError('');
-        if (index == 0) {
+        if (index === 0) {
             if (!patientFields.name || !patientFields.age || !patientFields.address || !patientFields.phone || !patientFields.examined_by || !patientFields.examined_for_disease) {
                 setError('Some Fields Are Missing');
                 return
             }
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }
-        if (index == steps.length - 1) {
+        if (index === steps.length - 1) {
             setLoader(true);
             if (!patientFields.test_result || !testFields[0].test_name || !testFields[0].normal_range || !testFields[0].patient_value) {
                 setError('Some Fields Are Missing');
@@ -85,7 +85,7 @@ const CreateReport = ({ openDialog, closeDialog, editReport }) => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         dispatch(createReport(updatedPatientFields)).then((res) => {
             setLoader(false);
-            if (res.payload.status != 201) {
+            if (res.payload.status !== 201) {
                 setError(res.payload.data)
             } else {
                 handleClose();
@@ -98,7 +98,7 @@ const CreateReport = ({ openDialog, closeDialog, editReport }) => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         dispatch(updateReport(updatedPatientFields)).then((res) => {
             setLoader(false);
-            if (res.payload.status != 200) {
+            if (res.payload.status !== 200) {
                 setError(res.payload.data)
             } else {
                 handleClose();
@@ -128,7 +128,7 @@ const CreateReport = ({ openDialog, closeDialog, editReport }) => {
 
     const testFieldsChange = (event, index) => {
         const updatedRow = testFields.map((item) => {
-            if (item.id == index) {
+            if (item.id === index) {
                 return { ...item, [event.target.name]: event.target.value }
             }
             return item;
@@ -174,21 +174,22 @@ const CreateReport = ({ openDialog, closeDialog, editReport }) => {
                                     <StepContent>
                                         {index !== steps.length - 1 &&
                                             <div>
-                                                <Fields name='name' label='Name' value={patientFields.name} onFieldsChange={(e) => patientFieldsChange(e)} />
-                                                <Fields name='address' label='Address' value={patientFields.address} onFieldsChange={(e) => patientFieldsChange(e)} />
+                                                <Fields name='name' label='Name' type='text' value={patientFields.name} onFieldsChange={(e) => patientFieldsChange(e)} />
+                                                <Fields name='address' label='Address' type='text' value={patientFields.address} onFieldsChange={(e) => patientFieldsChange(e)} />
                                                 <div className='create-report-form'>
-                                                    <Fields name='age' label='Age' value={patientFields.age} onFieldsChange={(e) => patientFieldsChange(e)} />
-                                                    <Fields name='phone' label='Phone' value={patientFields.phone} onFieldsChange={(e) => patientFieldsChange(e)} />
+                                                    <Fields name='age' label='Age' type='text'max='3' value={patientFields.age} onFieldsChange={(e) => patientFieldsChange(e)} />
+                                                    <Fields name='phone' label='Phone' type='text' max='10' value={patientFields.phone} onFieldsChange={(e) => patientFieldsChange(e)} />
+                                                    <Fields name='gender' label='Gender' type='text' value={patientFields.gender} onFieldsChange={(e) => patientFieldsChange(e)} />
                                                 </div>
                                                 <div className='create-report-form'>
-                                                    <Fields name='examined_by' label='Examined By' value={patientFields.examined_by} onFieldsChange={(e) => patientFieldsChange(e)} />
-                                                    <Fields name='examined_for_disease' label='Examined For' value={patientFields.examined_for_disease} onFieldsChange={(e) => patientFieldsChange(e)} />
+                                                    <Fields name='examined_by' type='text' label='Examined By' value={patientFields.examined_by} onFieldsChange={(e) => patientFieldsChange(e)} />
+                                                    <Fields name='examined_for_disease' type='text' label='Examined For' value={patientFields.examined_for_disease} onFieldsChange={(e) => patientFieldsChange(e)} />
                                                 </div>
-                                                <Fields name='examined_date' label='Examined Date' value={patientFields.examined_date} onFieldsChange={(e) => patientFieldsChange(e)} />
+                                                <Fields name='examined_date' label='Examined Date' type='date' value={patientFields.examined_date} onFieldsChange={(e) => patientFieldsChange(e)} />
                                                 {error && <span className='error'>*{error}</span>}
                                             </div>
                                         }
-                                        {index == steps.length - 1 &&
+                                        {index === steps.length - 1 &&
                                             <div>
                                                 {
                                                     testFields.map((item, index) => (
@@ -203,7 +204,7 @@ const CreateReport = ({ openDialog, closeDialog, editReport }) => {
                                                     onClick={addDynamicFields}
                                                     sx={{ mt: 1, mr: 1 }}
                                                 >
-                                                    Add More
+                                                    Add More Tests
                                                 </Button>
                                                 <Button
                                                     disabled={testFields.length === 1}
