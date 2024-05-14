@@ -45,7 +45,7 @@ function RegisterPage(){
                 <Box
                     component="form"
                     sx={{
-                        '& > :not(style)': { m: 1, width: '40ch' }, display: 'flex', flexDirection: 'column',alignItems: 'center',justifyContent: 'center'
+                        '& > :not(style)': { m: 1,width: {xs:'32ch',sm:'40ch'} }, display: 'flex', flexDirection: 'column',alignItems: 'center',justifyContent: 'center'
                     }}
                     noValidate
                     autoComplete="off"
@@ -56,7 +56,7 @@ function RegisterPage(){
                     <TextField id="outlined-basic-address" label="Address" variant="outlined" onChange={(e) => setAddress(e.target.value)} required />
                     {error && <span className='error' style={{textAlign:'center'}}>*{error}</span>}
                     <Button variant="contained" onClick={submit}>Submit</Button>
-                    <p className='authentication-component-redirect'>Already Have An Account? <Link to="/login">Login</Link></p>
+                    <p className='authentication-component-redirect'>Already Have An Account? <Link to="/login">SignUp</Link></p>
                 </Box>
             </div>
         </div>

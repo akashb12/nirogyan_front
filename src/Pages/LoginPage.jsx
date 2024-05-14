@@ -42,7 +42,7 @@ function LoginPage(){
                 <Box
                     component="form"
                     sx={{
-                        '& > :not(style)': { m: 1, width: '40ch' }, display: 'flex', flexDirection: 'column',alignItems:'center',justifyContent:'center'
+                        '& > :not(style)': { m: 1, width: {xs:'32ch',sm:'40ch'} }, display: 'flex', flexDirection: 'column',alignItems:'center',justifyContent:'center'
                     }}
                     noValidate
                     autoComplete="off"
@@ -51,7 +51,7 @@ function LoginPage(){
                     <TextField id="outlined-basic-password"type='password' label="Password" variant="outlined" onChange={(e) => setPassword(e.target.value)} required />
                     {error && <span className='error' style={{textAlign:'center'}}>*{error}</span>}
                     <Button variant="contained" onClick={submit}>Submit</Button>
-                    <p className='authentication-component-redirect'>Don't Have An Account? <Link to="/register">Create Account</Link></p>
+                    <p className='authentication-component-redirect'>Don't Have An Account? <Link to="/register">SignIn</Link></p>
                 </Box>
             </div>
         </div>

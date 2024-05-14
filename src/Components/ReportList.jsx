@@ -73,62 +73,65 @@ export default function ReportList() {
     useEffect(() => {
         getReportListData();
     },[])
-    
+
     return (
         <>
             <Paper className='report-list' sx={{ width: '100%', overflow: 'hidden' }}>
-                {reports && reports.length ? 
-                <TableContainer className='report-table-list' sx={{ maxHeight: 440 }}>
-                <div className='report-add-button'>
-                    <Button variant="contained" onClick={addReport}>Create New Report</Button>
-                </div>
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                            <TableCell>Action</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {reports
-                            .map((row) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
-                                        {columns.map((column) => {
-                                            const value = row[column.id];
+                {reports && reports.length ?
+                    <>
+                        <div className='report-add-button'>
+                            <Button variant="contained" onClick={addReport}>Create New Report</Button>
+                        </div>
+                        <TableContainer className='report-table-list' sx={{ maxHeight: 440 }}>
+
+                            <Table stickyHeader aria-label="sticky table">
+                                <TableHead>
+                                    <TableRow>
+                                        {columns.map((column) => (
+                                            <TableCell
+                                                key={column.id}
+                                                align={column.align}
+                                                style={{ minWidth: column.minWidth }}
+                                            >
+                                                {column.label}
+                                            </TableCell>
+                                        ))}
+                                        <TableCell>Action</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {reports
+                                        .map((row) => {
                                             return (
-                                                <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number'
-                                                        ? column.format(value)
-                                                        : value}
-                                                </TableCell>
+                                                <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
+                                                    {columns.map((column) => {
+                                                        const value = row[column.id];
+                                                        return (
+                                                            <TableCell key={column.id} align={column.align}>
+                                                                {column.format && typeof value === 'number'
+                                                                    ? column.format(value)
+                                                                    : value}
+                                                            </TableCell>
+                                                        );
+                                                    })}
+                                                    <TableCell>
+                                                        <EditIcon className='icon' onClick={() => editReport(row)} />
+                                                        <Link to={`/report/${row._id}`} target="_blank"><VisibilityIcon className='icon' /></Link>
+                                                    </TableCell>
+                                                </TableRow>
                                             );
                                         })}
-                                        <TableCell>
-                                            <EditIcon className='icon' onClick={()=> editReport(row)} />
-                                            <Link to={`/report/${row._id}`} target="_blank"><VisibilityIcon className='icon' /></Link>
-                                        </TableCell>
-                                    </TableRow>
-                                );
-                            })}
-                    </TableBody>
-                </Table>
-            </TableContainer> : 
-            <div>
-                <h1>No Reports Found</h1>
-                <div className='report-add-button-no-data'>
-                    <Button variant="contained" onClick={addReport}>Create New Report</Button>
-                </div>
-            </div>    
-            }
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </> :
+                    <div>
+                        <h1>No Reports Found</h1>
+                        <div className='report-add-button-no-data'>
+                            <Button variant="contained" onClick={addReport}>Create New Report</Button>
+                        </div>
+                    </div>
+                }
             </Paper>
             {createReportDialog && <CreateReport openDialog={createReportDialog} closeDialog={closeReportDialog} editReport={reportDetails} />}
 

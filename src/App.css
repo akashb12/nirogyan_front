@@ -132,10 +132,12 @@
 .report-list{
     height: 90vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
 }
+
 .report-table-list{
-    padding: 100px;
+    margin-top: 10px;
 }
 .icon {
     cursor: pointer;
@@ -152,3 +154,45 @@
     margin-left: 10px !important;
 }
 
+/* media queries */
+@media (max-width: 992px) {
+    /* authentication page */
+    .authentication-form{
+        padding: 5px;
+    }
+    /* report list */
+    .report-table-list {
+        padding: 0px;
+    }
+
+    /* report page */
+    .report-page {
+        margin: 0 0;
+        border: none;
+    }
+    .report-page-body{
+        margin: 0 0;
+    }
+    .report-page-heading {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .report-page-patientinfo{
+        flex-direction: column;
+        margin-left: 10px;
+        margin-right: 0px;
+    }
+    .report-table{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .pdf-download{
+        position: absolute;
+        left: 40px;
+        top: 60px;
+    }
+    .report-result{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
