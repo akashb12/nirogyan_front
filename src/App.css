@@ -148,6 +148,7 @@
 /* create report form */
 .create-report-form{
     display: flex;
+    width: 600px;
 }
 .create-report-form-field{
     margin-right: 10px !important;
@@ -194,5 +195,9 @@
     .report-result{
         margin-left: 10px;
         margin-right: 10px;
+    }
+    .create-report-form{
+        width: 100%;
+        flex-direction: column;
     }
 }

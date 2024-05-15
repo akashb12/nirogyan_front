@@ -56,7 +56,7 @@ function RegisterPage(){
                     <TextField id="outlined-basic-address" label="Address" variant="outlined" onChange={(e) => setAddress(e.target.value)} required />
                     {error && <span className='error' style={{textAlign:'center'}}>*{error}</span>}
                     <Button variant="contained" onClick={submit}>Submit</Button>
-                    <p className='authentication-component-redirect'>Already Have An Account? <Link to="/login">SignUp</Link></p>
+                    <p className='authentication-component-redirect'>Already Have An Account? <Link to="/login">SignIn</Link></p>
                 </Box>
             </div>
         </div>

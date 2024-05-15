@@ -51,7 +51,7 @@ function LoginPage(){
                     <TextField id="outlined-basic-password"type='password' label="Password" variant="outlined" onChange={(e) => setPassword(e.target.value)} required />
                     {error && <span className='error' style={{textAlign:'center'}}>*{error}</span>}
                     <Button variant="contained" onClick={submit}>Submit</Button>
-                    <p className='authentication-component-redirect'>Don't Have An Account? <Link to="/register">SignIn</Link></p>
+                    <p className='authentication-component-redirect'>Don't Have An Account? <Link to="/register">SignUp</Link></p>
                 </Box>
             </div>
         </div>
